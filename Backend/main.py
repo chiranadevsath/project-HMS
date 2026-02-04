@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
+from app.models.database import Base, engine
 
 from app.routes import data
 
@@ -23,9 +24,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+Base.metadata.create_all(bind=engine)
 
 @app.get("/")
 def read_root():
     return {"Hello": "This is the backend of Hospital Management System 🏥"}
+
+
 
 
