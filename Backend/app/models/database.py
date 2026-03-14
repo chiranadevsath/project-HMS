@@ -24,6 +24,12 @@ SessionLocal = sessionmaker(
 
 Base = declarative_base()
 
+class User(Base):
+    __tablename__ = "user"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+
 
 class Hospital(Base):
     __tablename__ = "hospital"
