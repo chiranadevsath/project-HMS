@@ -26,6 +26,7 @@ app.add_middleware(
 
 Base.metadata.create_all(bind=engine)
 
+
 @app.get("/")
 def read_root():
     return {"Hello": "This is the backend of Hospital Management System 🏥"}
