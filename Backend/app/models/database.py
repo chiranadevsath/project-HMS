@@ -27,32 +27,39 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = "user"
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
+    id = Column(Integer, primary_key=True , autoincrement=True)
+    username = Column(String, nullable = False)
+    first_name = Column(String, nullable=False)
+    last_name = Column(String, nullable=False)
+    hospital_id = Column(Integer, ForeignKey("hospital.id"))
+    email = Column(String, nullable = False)
+
 
 
 class Hospital(Base):
     __tablename__ = "hospital"
-    id = Column(Integer, primary_key = True)
+    id = Column(Integer, primary_key = True, autoincrement=True)
     name = Column(String, nullable = False)
-    address = Column(String, nullable = True)
+    hospital_name = Column(String, nullable = False)
+    address = Column(String, nullable = False)
+
 
 class UserPosition(Base):
     __tablename__ = "user_position"
-    id = Column(Integer, primary_key = True)
+    id = Column(Integer, primary_key = True, autoincrement=True)
     hospital_id = Column(Integer, ForeignKey("hospital.id"))
     user_name = Column(String, nullable = False)
     position = Column(String, nullable = False)
 
 class UserAuthorization(Base):
     __tablename__ = "authorization"
-    id = Column(Integer, primary_key = True)
+    id = Column(Integer, primary_key = True, autoincrement=True)
     user_id = Column(Integer, ForeignKey("user.id"))
     password_hash = Column(String, nullable = False)
 
 class HospitalAuthorization(Base):
     __tablename__ = "hospital_authorization"
-    id = Column(Integer, primary_key = True)
+    id = Column(Integer, primary_key = True , autoincrement=True)
     hospital_id = Column(Integer, ForeignKey("hospital.id"))
     password_hash = Column(String, nullable = False)
 

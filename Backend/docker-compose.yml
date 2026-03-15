@@ -1,4 +1,4 @@
-version: '3.8'
+#version: '3.8'
 
 name : "Hospital backend"
 
@@ -12,4 +12,11 @@ services:
 
     volumes:
       - .:/app
+
+    develop:
+      watch:
+          - path: .
+            action: rebuild
+
+
     command: [ "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload" ]
