@@ -6,6 +6,9 @@ class HospitalType(BaseModel):
     password : str
     hospital_name : str
 
+class HospitalLoginType(BaseModel):
+    hospital_name : str
+    password : str
 
 class User(BaseModel):
     username : str
