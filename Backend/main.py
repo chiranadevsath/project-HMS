@@ -1,9 +1,7 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-from app.models.database import Base, engine
-
 from app.routes import data, user , hospital
-
+from app.config.config import create_tables
 
 app = FastAPI()
 
@@ -29,8 +27,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-Base.metadata.create_all(bind=engine)
-
+create_tables()
 
 # connect to the database
 

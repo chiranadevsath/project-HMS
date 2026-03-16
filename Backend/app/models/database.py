@@ -3,6 +3,7 @@ import os
 from sqlalchemy import Integer, create_engine, String
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.sql.schema import Column, ForeignKey
+from app.config.config import Base
 
 load_dotenv()
 
@@ -22,7 +23,6 @@ SessionLocal = sessionmaker(
     bind=engine
 )
 
-Base = declarative_base()
 
 class User(Base):
     __tablename__ = "user"
@@ -40,8 +40,11 @@ class Hospital(Base):
     __tablename__ = "hospital"
     id = Column(Integer, primary_key = True, autoincrement=True)
     name = Column(String, nullable = False)
-    hospital_name = Column(String, nullable = False)
-    address = Column(String, nullable = False)
+    hospital_name = Column(String, nullable = False, unique = True)
+    address = Column(String, nullable = True)
+    password_hash = Column(String, nullable = False )
+    email = Column(String, nullable = False , unique = True)
+
 
 
 class UserPosition(Base):

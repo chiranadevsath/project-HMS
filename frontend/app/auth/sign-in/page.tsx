@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { hash } from "crypto";
 
 const SignIn = () => {
   // useState hook to capture the entered data by the user and pass to the backend API

@@ -1,13 +1,11 @@
 from pydantic import BaseModel
 
-class Hospital(BaseModel):
-    hospital_id: int
+class HospitalType(BaseModel):
     name: str
     email: str
+    password : str
+    hospital_name : str
 
-    class Config:
-        title = "Hospital"
-        from_attributes = True
 
 class User(BaseModel):
     username : str
@@ -17,5 +15,4 @@ class User(BaseModel):
     hospital_id : int
 
     class Config:
-        title = "User"
         from_attributes = True
