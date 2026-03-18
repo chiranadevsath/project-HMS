@@ -17,7 +17,7 @@ async def get_hospital(hospital_name : str, db: Session = Depends(get_db)):
     if result is None:
         raise HTTPException(status_code=404, detail="Hospital not found")
     else:
-        return result
+        return {"found": result.hospital_name}
 
 @router.post("/add")
 def add_hospital(hospital: HospitalType, db: Session = Depends(get_db)):
@@ -54,3 +54,15 @@ async def login_hospital(hospital_login: HospitalLoginType, db: Session = Depend
         raise HTTPException(status_code=401, detail="Invalid password")
 
     return hospital
+
+
+@router.delete("/delete")
+def delete_hospital(username : str, db: Session = Depends(get_db)):
+    stmt = select(Hospital).where(Hospital.hospital_name == username)
+    result = db.execute(stmt).scalar_one_or_none()
+    if result is None:
+        raise HTTPException(status_code=404, detail="Hospital name not found")
+    else:
+        db.delete(result)
+        db.commit()
+        return {"deleted": result.hospital_name}
